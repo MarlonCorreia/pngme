@@ -5,7 +5,6 @@ import (
 	"encoding/binary"
 	"fmt"
 	"io"
-	"os"
 	"pngme/internal/chunk"
 	chunktype "pngme/internal/chunk_type"
 )
@@ -63,7 +62,7 @@ func (p *Png) PngAsBytes() []byte {
 	return data
 }
 
-func PngFromFile(file *os.File) (*Png, error) {
+func PngFromFile(file io.Reader) (*Png, error) {
 	png := new(Png)
 	head := make([]byte, 8)
 
@@ -117,4 +116,10 @@ func PngFromFile(file *os.File) (*Png, error) {
 	png.chunks = chunks
 
 	return png, nil
+}
+
+func PngFromChunks(chunks []chunk.Chunk) *Png {
+	return &Png{
+		chunks: chunks,
+	}
 }
