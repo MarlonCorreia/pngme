@@ -1,5 +1,9 @@
 package main
 
-func main() {
+import (
+	"pngme/internal/cmd"
+)
 
+func main() {
+    cmd.InitCmd()
 }
